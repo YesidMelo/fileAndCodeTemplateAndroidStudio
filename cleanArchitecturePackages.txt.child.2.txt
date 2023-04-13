@@ -58,30 +58,30 @@ dependencies {
  //region nuevas implementaciones
 
     //region navigation, legacy y pager
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    implementation "androidx.navigation:navigation-fragment-ktx:\$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:\$navigation"
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //endregion
 
     //region dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
-    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$metadataDagger"
+    implementation "com.google.dagger:dagger:\$daggerVersion"
+    implementation "com.google.dagger:dagger-android:\$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:\$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:\$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:\$daggerVersion"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:\$metadataDagger"
     //endregion
 
     //region room
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-runtime:\$room_version"
+    annotationProcessor "androidx.room:room-compiler:\$room_version"
+    kapt "androidx.room:room-compiler:\$room_version"
+    testImplementation "androidx.room:room-testing:\$room_version"
     //endregion
 
     //region lotties
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation "com.airbnb.android:lottie:\$lottieVersion"
     //endregion
 
     //region charts
@@ -125,22 +125,22 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
           '**/*Test*.*',
           'android/**/*.*',
 
-          '**/*$ViewBinder*.*',
-          '**/*$ViewInjector*.*',
+          '**/*\$ViewBinder*.*',
+          '**/*\$ViewInjector*.*',
           '**/*Module.*',
           '**/*dao*.*',
           '**/*_MembersInjector.class',
           '**/Dagger*Component*.class',
           '**/Dagger*Subcomponent*.class',
-          '**/*Subcomponent$Builder.class',
+          '**/*Subcomponent\$Builder.class',
           '**/*Module_*Factory.class',
           '**/*Module_*Impl.class',
           '**/*Module_*ViewBinding.class',
           '**/databinding/**'
     ]
 
-    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
-    def mainSrc = "$project.projectDir/src/main/java"
+    def debugTree = fileTree(dir: "\$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "\$project.projectDir/src/main/java"
 
     sourceDirectories.from = files([mainSrc])
     classDirectories.from = files([debugTree])

@@ -1,0 +1,1 @@
+this template generate the structure of clean architecture
