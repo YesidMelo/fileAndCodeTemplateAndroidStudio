@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="azul_fondo_balance">#FFA3C8FF</color>
+    <color name="azul_toolbar_balance">#ff548fe6</color>
+    <color name="verde_fondo_balance">#FF84FFA7</color>
+    <color name="verde_toolbar_balance">#ff28E654</color>
+    <color name="rojo_fondo_balance">#FFF9C8CA</color>
+    <color name="rojo_toolbar_balance">#ffE80814</color>
+    <color name="black">#FF000000</color>
+    <color name="black_hint">#FF757575</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

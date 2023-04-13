@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.sources
+package ${PACKAGE_NAME}.sources.room
 
 import android.content.Context
 import androidx.room.Database
@@ -23,7 +23,7 @@ abstract class DBApp : RoomDatabase() {
         private val NAME_DB = "${PACKAGE_NAME}"
         private var instance: DBApp? = null
 
-        fun traerInstancia(context: Context) : DBApp {
+        fun getInstance(context: Context) : DBApp {
             if(instance == null) {
                 instance = Room
                     .databaseBuilder(context,DBApp::class.java, NAME_DB)
