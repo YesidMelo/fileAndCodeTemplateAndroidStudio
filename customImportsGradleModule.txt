@@ -1,0 +1,152 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'jacoco'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+
+//region properties
+
+//region documents
+def secretsDevFile = rootProject.file("secrets_dev.properties")
+def secretsDev = new Properties()
+secretsDev.load(new FileInputStream(secretsDevFile))
+
+def secretsProdFile = rootProject.file("secrets_prod.properties")
+def secretsProd = new Properties()
+secretsProd.load(new FileInputStream(secretsProdFile))
+//endregion
+
+//region name variables
+def pruebas = "PRUEBAS"
+//endregion
+
+//endregion
+
+android {
+ //region jacoco
+    jacoco {
+        version = "0.8.7"
+    }
+
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+                excludes = ['jdk.internal.*']
+            }
+        }
+
+        unitTests.returnDefaultValues = true
+    }
+    //endregion
+}
+
+ext {
+    lottieVersion = "3.4.0"
+    daggerVersion = "2.35.1"
+    metadataDagger = "0.5.0"
+    room_version = "2.4.3"
+    navigation = "2.5.3"
+}
+
+dependencies {
+
+ //region nuevas implementaciones
+
+    //region navigation, legacy y pager
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    //endregion
+
+    //region dagger
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:$metadataDagger"
+    //endregion
+
+    //region room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+    //endregion
+
+    //region lotties
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+    //endregion
+
+    //region charts
+    //implementation files('MPAndroidChart_v3.0.1.jar')
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //endregion
+
+    //region mockito
+    testImplementation 'org.mockito:mockito-core:3.8.0'
+    testImplementation 'org.mockito:mockito-inline:2.8.47'
+    androidTestImplementation 'org.mockito:mockito-android:3.8.0'
+    //endregion
+
+    //region firebase
+    implementation 'com.google.firebase:firebase-crashlytics:18.3.2'
+    implementation 'com.google.firebase:firebase-analytics:21.2.0'
+    //endregion
+
+    //region publicidad
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    //endregion
+
+    //endregion
+
+}
+
+
+//region task jacoco
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = [
+            '**/R.class',
+          '**/R$*.class',
+          '**/BuildConfig.*',
+          '**/Manifest*.*',
+          '**/*Test*.*',
+          'android/**/*.*',
+
+          '**/*$ViewBinder*.*',
+          '**/*$ViewInjector*.*',
+          '**/*Module.*',
+          '**/*dao*.*',
+          '**/*_MembersInjector.class',
+          '**/Dagger*Component*.class',
+          '**/Dagger*Subcomponent*.class',
+          '**/*Subcomponent$Builder.class',
+          '**/*Module_*Factory.class',
+          '**/*Module_*Impl.class',
+          '**/*Module_*ViewBinding.class',
+          '**/databinding/**'
+    ]
+
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories.from = files([mainSrc])
+    classDirectories.from = files([debugTree])
+    executionData.from = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
+    ])
+
+}
+//endregion

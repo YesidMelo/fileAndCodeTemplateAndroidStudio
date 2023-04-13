@@ -1,0 +1,34 @@
+-application
+    helpers
+-di
+    sources
+    logic
+    ui
+        moduleDialogs
+        moduleActivities
+        moduleFragments
+        customs
+-sources
+    cache
+    db
+    apis
+    sharedPreferences
+-logic
+    useCases
+    componentesUI
+    constants
+    exceptions
+    models
+    datasources
+    utils
+    extentions
+-ui
+    activities
+    base
+    constants
+    customs
+    dialogs
+    fragments
+    utils
+        adapters
+        extentions
