@@ -1,14 +1,12 @@
-package ${PACKAGE_NAME}.di.logic
+package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2
 
-import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasource
-import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasourceImpl
-import dagger.Module
-import dagger.Provides
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
+import javax.inject.Inject
 
-@Module
-class DatasourceModule {
-    
-    @Provides
-    fun providesExampleDatasource(): ExampleDatasource = ExampleDatasourceImpl()
+class ExampleComponent2Impl constructor(
+    @JvmField @Inject var loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase
+) : ExampleComponent2 {
+
+    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
 
 }

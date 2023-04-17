@@ -1,12 +1,22 @@
-package ${PACKAGE_NAME}.sources.room.entities
+package ${PACKAGE_NAME}.sources.room.converters
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import ${PACKAGE_NAME}.sources.room.entities.BaseEntity
+import android.annotation.SuppressLint
+import androidx.room.TypeConverter
+import java.text.SimpleDateFormat
 import java.util.Date
 
-@Entity
-data class ExampleEntity (
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?,
-): BaseEntity()
+@SuppressLint("SimpleDateFormat")
+class CustomConverter {
+
+    @TypeConverter
+    fun toString(fecha: Date) : String {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return simpleDateFormat.format(fecha)
+    }
+
+    @TypeConverter
+    fun toDate(fechaString: String) : Date? {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return simpleDateFormat.parse(fechaString)
+    }
+}

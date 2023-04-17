@@ -1,11 +1,14 @@
-package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
+package ${PACKAGE_NAME}.di
 
-import ${PACKAGE_NAME}.logic.models.ExampleModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import ${PACKAGE_NAME}.application.CustomApplication
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-class ExampleUseCaseImpl : ExampleUseCase {
-    override fun invoke(): Flow<ExampleModel> = flow {
-        emit(ExampleModel(value = 100.0))
-    }
+@Module
+class AplicationModule {
+
+    @Singleton
+    @Provides
+    fun providesContext(aplication: CustomApplication) = aplication
 }

@@ -1,19 +1,13 @@
-package ${PACKAGE_NAME}.di.ui.base
+package ${PACKAGE_NAME}.di.sources
 
-import android.content.Context
-import androidx.lifecycle.ViewModel
-import ${PACKAGE_NAME}.di.ui.customs.DaggerFragmentCustom
+import ${PACKAGE_NAME}.sources.cache.Cache
+import dagger.Module
+import dagger.Provides
 
-abstract class BaseFragmentDagger<T: ViewModel> : DaggerFragmentCustom() {
+@Module
+class CacheModule {
 
-    //region variables
-    private var viewModel: T? = null
-    //endregion
+    @Provides
+    fun providesMemoriaCache(): Cache = Cache.getInstance()
 
-    abstract fun traerViewModel() : T
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewModel = traerViewModel()
-    }
 }

@@ -1,11 +1,11 @@
-package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
+package ${PACKAGE_NAME}.logic.datasources.exampleDatasource
 
 import ${PACKAGE_NAME}.logic.models.ExampleModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class ExampleUseCaseImpl : ExampleUseCase {
-    override fun invoke(): Flow<ExampleModel> = flow {
+class ExampleDatasourceImpl : ExampleDatasource {
+    override fun loadExample(): Flow<ExampleModel> = flow {
         emit(ExampleModel(value = 100.0))
     }
 }

@@ -1,21 +1,8 @@
-package ${PACKAGE_NAME}.di.logic
+package ${PACKAGE_NAME}.logic.exception
 
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1Impl
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2Impl
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
-import dagger.Module
-import dagger.Provides
+enum class OrigenError { Sistema, Usuario }
 
-@Module
-class ComponentUIModule {
-
-    @Provides
-    fun providesExampleComponent1(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase)
-        : ExampleComponent1 = ExampleComponent1Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
-
-    @Provides
-    fun providesExampleComponent2(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase)
-        : ExampleComponent2 = ExampleComponent2Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
-}
+open class LogicException constructor(
+    var mensaje : String = "Surgio un problema inesperado intentelo mas tarde",
+    val origenError: OrigenError = OrigenError.Sistema
+) : Exception(mensaje)

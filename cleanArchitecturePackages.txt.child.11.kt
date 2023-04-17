@@ -1,8 +1,16 @@
-package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
+package ${PACKAGE_NAME}.di.ui.builders.dialog
 
-import ${PACKAGE_NAME}.logic.models.ExampleModel
-import kotlinx.coroutines.flow.Flow
+import ${PACKAGE_NAME}.ui.dialogs.InformativeDialog
+import ${PACKAGE_NAME}.ui.dialogs.LoadingDialog
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
-interface ExampleUseCase {
-    fun invoke(): Flow<ExampleModel>
+@Module
+abstract class DialogBuilder {
+    
+    @ContributesAndroidInjector(modules = [])
+    abstract fun contributeInformativeDialog(): InformativeDialog
+    
+    @ContributesAndroidInjector(modules = [])
+    abstract fun contributeLoadingDialog() : LoadingDialog
 }

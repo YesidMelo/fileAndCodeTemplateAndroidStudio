@@ -1,14 +1,12 @@
-package ${PACKAGE_NAME}.di
+package ${PACKAGE_NAME}.ui.utils.extentions
 
-import ${PACKAGE_NAME}.application.CustomApplication
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import ${PACKAGE_NAME}.R
+import ${PACKAGE_NAME}.logic.exception.LogicException
 
-@Module
-class AplicationModule {
+fun <T : LogicException> T.traerMensajeStringRes() : Int {
+    return R.string.surgio_problema_inesperado
+}
 
-    @Singleton
-    @Provides
-    fun providesContext(aplication: CustomApplication) = aplication
+fun <T : LogicException>  T.traerTituloStringRes() : Int {
+    return R.string.problema_inesperado
 }

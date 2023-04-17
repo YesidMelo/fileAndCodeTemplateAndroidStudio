@@ -1,1 +1,4 @@
 this template generate the structure of clean architecture
+
+1. put this line in manifest in label application 
+android:name=".application.CustomApplication"

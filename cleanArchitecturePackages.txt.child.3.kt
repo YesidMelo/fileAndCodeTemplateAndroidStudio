@@ -1,26 +1,12 @@
-package ${PACKAGE_NAME}.application
+package ${PACKAGE_NAME}.di.ui.builders.activities
 
-import ${PACKAGE_NAME}.di.DaggerApplicationComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import ${PACKAGE_NAME}.ui.activities.main.MainActivity
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
-class CustomApplication : DaggerApplication() {
+@Module
+interface ActivityBuilder {
 
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-    }
-    
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
-        DaggerApplicationComponent.builder().build()
-    
-
-    //region estatico
-
-    companion object {
-        private var instance: CustomApplication? = null
-        fun getInstance() = instance
-    }
-
-    //endregion
+    @ContributesAndroidInjector(modules = [ActivityViewModelModule::class])
+    fun providesMainActivity(): MainActivity
 }

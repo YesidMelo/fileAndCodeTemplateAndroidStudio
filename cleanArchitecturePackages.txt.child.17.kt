@@ -1,12 +1,8 @@
-package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2
+package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
 
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
-import javax.inject.Inject
+import ${PACKAGE_NAME}.logic.models.ExampleModel
+import kotlinx.coroutines.flow.Flow
 
-class ExampleComponent2Impl constructor(
-    @JvmField @Inject var loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase
-) : ExampleComponent2 {
-
-    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
-
+interface ExampleUseCase {
+    fun invoke(): Flow<ExampleModel>
 }

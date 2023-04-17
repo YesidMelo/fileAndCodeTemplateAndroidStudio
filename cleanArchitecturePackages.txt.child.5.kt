@@ -1,31 +1,45 @@
-package ${PACKAGE_NAME}.sources.room.daos
+package ${PACKAGE_NAME}.ui.fragments
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
-import ${PACKAGE_NAME}.sources.room.entities.BaseEntity
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import ${PACKAGE_NAME}.R
+import ${PACKAGE_NAME}.databinding.FragmentSecondBinding
 
-@Dao
-interface BaseDao<T : BaseEntity> {
+/**
+ * A simple [Fragment] subclass as the second destination in the navigation.
+ */
+class SecondFragment : Fragment() {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertElement(element: T) : Long
+    private var _binding: FragmentSecondBinding? = null
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertElements(elements: List<T>)
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
-    @Update
-    fun updateElement(element: T)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-    @Update
-    fun updateElements(elements: List<T>)
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return binding.root
 
-    @Delete
-    fun deleteElement(element: T)
+    }
 
-    @Delete
-    fun deleteListElements(elements: List<T>)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        binding.buttonSecond.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

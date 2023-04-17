@@ -1,12 +1,6 @@
-package ${PACKAGE_NAME}.di.ui.builders.activities
+package ${PACKAGE_NAME}.sources.room.entities
 
-import ${PACKAGE_NAME}.ui.activities.main.MainActivity
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import androidx.room.Entity
 
-@Module
-interface ActivityBuilder {
-
-    @ContributesAndroidInjector(modules = [ActivityViewModelModule::class])
-    fun providesMainActivity(): MainActivity
-}
+@Entity
+open class BaseEntity

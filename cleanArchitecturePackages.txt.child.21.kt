@@ -1,14 +1,11 @@
-package ${PACKAGE_NAME}.di.sources
+package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1
 
-import ${PACKAGE_NAME}.application.CustomApplication
-import ${PACKAGE_NAME}.sources.room.DBApp
-import dagger.Module
-import dagger.Provides
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
+import javax.inject.Inject
 
-@Module
-class DBModule {
+class ExampleComponent1Impl constructor(
+    @JvmField @Inject var loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase
+): ExampleComponent1 {
 
-    @Provides
-    fun providesBaseDatosLocal(): DBApp = DBApp.getInstance(context = CustomApplication.getInstance()!!.applicationContext)
-
+    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
 }

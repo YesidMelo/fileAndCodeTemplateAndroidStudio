@@ -1,13 +1,6 @@
-package ${PACKAGE_NAME}.di.sources
+package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2
 
-import ${PACKAGE_NAME}.sources.cache.Cache
-import dagger.Module
-import dagger.Provides
+import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
 
-@Module
-class CacheModule {
-
-    @Provides
-    fun providesMemoriaCache(): Cache = Cache.getInstance()
-
+interface ExampleComponent2 : BaseUI {
 }

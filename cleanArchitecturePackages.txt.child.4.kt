@@ -1,22 +1,13 @@
-package ${PACKAGE_NAME}.sources.room.converters
+package ${PACKAGE_NAME}.di.ui.builders.activities
 
-import android.annotation.SuppressLint
-import androidx.room.TypeConverter
-import java.text.SimpleDateFormat
-import java.util.Date
+import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
+import ${PACKAGE_NAME}.ui.activities.main.MainViewModel
+import dagger.Module
+import dagger.Provides
 
-@SuppressLint("SimpleDateFormat")
-class CustomConverter {
+@Module
+class ActivityViewModelModule {
 
-    @TypeConverter
-    fun toString(fecha: Date) : String {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        return simpleDateFormat.format(fecha)
-    }
-
-    @TypeConverter
-    fun toDate(fechaString: String) : Date? {
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        return simpleDateFormat.parse(fechaString)
-    }
+    @Provides
+    fun providesMainViewModel(mainComponentUI: MainComponentUI) = MainViewModel(mainComponentUI = mainComponentUI)
 }

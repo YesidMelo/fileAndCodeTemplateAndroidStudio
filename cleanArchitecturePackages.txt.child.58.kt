@@ -1,13 +1,31 @@
-package ${PACKAGE_NAME}.di.ui.builders.activities
+package ${PACKAGE_NAME}.sources.room.daos
 
-import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
-import ${PACKAGE_NAME}.ui.activities.main.MainViewModel
-import dagger.Module
-import dagger.Provides
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Update
+import ${PACKAGE_NAME}.sources.room.entities.BaseEntity
 
-@Module
-class ActivityViewModelModule {
+@Dao
+interface BaseDao<T : BaseEntity> {
 
-    @Provides
-    fun providesMainViewModel(mainComponentUI: MainComponentUI) = MainViewModel(mainComponentUI = mainComponentUI)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertElement(element: T) : Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertElements(elements: List<T>)
+
+    @Update
+    fun updateElement(element: T)
+
+    @Update
+    fun updateElements(elements: List<T>)
+
+    @Delete
+    fun deleteElement(element: T)
+
+    @Delete
+    fun deleteListElements(elements: List<T>)
+
 }

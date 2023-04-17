@@ -1,8 +1,16 @@
-package ${PACKAGE_NAME}.logic.datasources.exampleDatasource
+package ${PACKAGE_NAME}.ui.activities.main
 
-import ${PACKAGE_NAME}.logic.models.ExampleModel
-import kotlinx.coroutines.flow.Flow
+import android.util.Log
+import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
+import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
+import ${PACKAGE_NAME}.ui.base.BaseViewModel
+import javax.inject.Inject
 
-interface ExampleDatasource {
-    fun loadExample(): Flow<ExampleModel>
+class MainViewModel(@Inject @JvmField var mainComponentUI: MainComponentUI) : BaseViewModel() {
+
+    override fun getBaseUI(): BaseUI = mainComponentUI
+    
+    fun clickButton(){
+        Log.e("Err","clic in button");
+    }
 }

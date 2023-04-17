@@ -1,5 +1,6 @@
-package ${PACKAGE_NAME}.logic.models
+package ${PACKAGE_NAME}.logic.componentsUI.mainComponent
 
-data class ExampleModel (
-    var value: Double
-)
+import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
+
+interface MainComponentUI: BaseUI {
+}

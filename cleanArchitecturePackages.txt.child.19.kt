@@ -1,8 +1,7 @@
-package ${PACKAGE_NAME}.logic.exception
+package ${PACKAGE_NAME}.logic.componentsUI
 
-enum class OrigenError { Sistema, Usuario }
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
 
-open class LogicException constructor(
-    var mensaje : String = "Surgio un problema inesperado intentelo mas tarde",
-    val origenError: OrigenError = OrigenError.Sistema
-) : Exception(mensaje)
+interface BaseUI {
+    fun getListenerExceptionUseCase() : LoadListenerExceptionsUseCase 
+}
