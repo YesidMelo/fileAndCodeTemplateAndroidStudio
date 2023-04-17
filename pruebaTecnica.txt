@@ -1,0 +1,8 @@
+
+add to gradle
+    //region gestores datos
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    implementation 'com.squareup.picasso:picasso:2.8'
+    //endregion
