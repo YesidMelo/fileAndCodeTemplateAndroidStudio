@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class DatasourcesModule {
+class DatasourceModule {
     
     @Provides
     fun providesExampleDatasource(): ExampleDatasource = ExampleDatasourceImpl()

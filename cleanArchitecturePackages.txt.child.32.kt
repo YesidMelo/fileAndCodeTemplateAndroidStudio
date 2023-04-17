@@ -7,11 +7,9 @@ import androidx.annotation.StringRes
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import ${PACKAGE_NAME}.di.ui.BaseFragmentDagger
+import ${PACKAGE_NAME}.di.ui.base.BaseFragmentDagger
 import ${PACKAGE_NAME}.ui.dialogs.InformativeDialog
 import org.jetbrains.annotations.NotNull
-import java.util.*
-
 
 abstract class BaseFragment< T : BaseViewModel> : BaseFragmentDagger<T>(), LifecycleOwner {
 

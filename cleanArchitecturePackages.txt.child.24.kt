@@ -9,7 +9,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class CasosUsoModule {
+class UseCasesModule {
 
     @Provides
     fun providesExampleUseCase(): ExampleUseCase = ExampleUseCaseImpl()

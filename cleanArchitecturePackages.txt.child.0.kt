@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import ${PACKAGE_NAME}.sources.room.entities.ExampleEntity
 
 @Database(
     //region entities
-    entities = [],
+    entities = [
+    ExampleEntity::class
+    ],
     //endregion
 
     //region views

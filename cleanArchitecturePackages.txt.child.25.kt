@@ -9,7 +9,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ComponenteUIModule {
+class ComponentUIModule {
 
     @Provides
     fun providesExampleComponent1(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase)

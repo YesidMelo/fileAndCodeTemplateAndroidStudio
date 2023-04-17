@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class BaseDatosModule {
+class DBModule {
 
     @Provides
     fun providesBaseDatosLocal(): DBApp = DBApp.getInstance(context = CustomApplication.getInstance()!!.applicationContext)
