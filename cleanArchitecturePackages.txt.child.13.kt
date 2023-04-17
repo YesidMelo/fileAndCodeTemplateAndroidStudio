@@ -8,6 +8,9 @@ import ${PACKAGE_NAME}.di.sources.CacheModule
 import ${PACKAGE_NAME}.di.sources.DBModule
 import ${PACKAGE_NAME}.di.ui.builders.activities.ActivityBuilder
 import ${PACKAGE_NAME}.di.ui.builders.activities.ActivityViewModelModule
+import ${PACKAGE_NAME}.di.ui.builders.dialog.DialogBuilder
+import ${PACKAGE_NAME}.di.ui.builders.fragments.FragmentBuilder
+import ${PACKAGE_NAME}.di.ui.builders.fragments.FragmentViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
@@ -27,11 +30,21 @@ import dagger.android.AndroidInjector
 
         //region ui
         AndroidInjectionModule::class,
-        
+
+        //region Dialogs
+        DialogBuilder::class,
+        //endregion
+
         //region activities
         ActivityViewModelModule::class,
-        ActivityBuilder::class
+        ActivityBuilder::class,
         //endregion
+
+        //region fragments
+        FragmentViewModelModule::class,
+        FragmentBuilder::class
+        //endregion
+
         //endregion
     ]
 )

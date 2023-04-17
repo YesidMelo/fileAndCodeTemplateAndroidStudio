@@ -6,6 +6,7 @@ import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1Imp
 import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2Impl
 import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
 import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUIImpl
+import ${PACKAGE_NAME}.logic.useCases.exceptionUseCase.ExceptionUseCase
 import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
 import dagger.Module
 import dagger.Provides
@@ -19,11 +20,11 @@ class ComponentUIModule {
         ExampleComponent1Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
 
     @Provides
-    fun providesExampleComponent2(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase)
+    fun providesExampleComponent2(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase, exceptionUseCase: ExceptionUseCase)
             : ExampleComponent2 =
-        ExampleComponent2Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
+        ExampleComponent2Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase, exceptionsUseCase = exceptionUseCase)
 
     @Provides
-    fun providesMainComponentUI (loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase): MainComponentUI
-        = MainComponentUIImpl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
+    fun providesMainComponentUI(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase): MainComponentUI =
+        MainComponentUIImpl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
 }

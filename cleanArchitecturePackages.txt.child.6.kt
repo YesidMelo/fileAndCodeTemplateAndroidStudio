@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.ui.fragments
+package ${PACKAGE_NAME}.ui.fragments.first
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,17 +8,22 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import ${PACKAGE_NAME}.R
 import ${PACKAGE_NAME}.databinding.FragmentFirstBinding
+import ${PACKAGE_NAME}.ui.base.BaseFragment
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : BaseFragment<FirstViewModel>() {
 
     private var _binding: FragmentFirstBinding? = null
+    @Inject lateinit var firstViewModel: FirstViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    override fun traerViewModel(): FirstViewModel = firstViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,4 +47,5 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
