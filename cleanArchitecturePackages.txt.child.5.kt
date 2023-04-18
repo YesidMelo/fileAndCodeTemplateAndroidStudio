@@ -1,51 +1,55 @@
-package ${PACKAGE_NAME}.ui.fragments.second
+package ${PACKAGE_NAME}.di
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import ${PACKAGE_NAME}.R
-import ${PACKAGE_NAME}.databinding.FragmentSecondBinding
-import ${PACKAGE_NAME}.ui.base.BaseFragment
-import javax.inject.Inject
+import ${PACKAGE_NAME}.application.CustomApplication
+import ${PACKAGE_NAME}.di.logic.ComponentUIModule
+import ${PACKAGE_NAME}.di.logic.DatasourceModule
+import ${PACKAGE_NAME}.di.logic.UseCasesModule
+import ${PACKAGE_NAME}.di.sources.CacheModule
+import ${PACKAGE_NAME}.di.sources.DBModule
+import ${PACKAGE_NAME}.di.ui.builders.activities.ActivityBuilder
+import ${PACKAGE_NAME}.di.ui.builders.activities.ActivityViewModelModule
+import ${PACKAGE_NAME}.di.ui.builders.dialog.DialogBuilder
+import ${PACKAGE_NAME}.di.ui.builders.fragments.FragmentBuilder
+import ${PACKAGE_NAME}.di.ui.builders.fragments.FragmentViewModelModule
+import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class SecondFragment : BaseFragment<SecondViewModel>() {
+@Component(
+    modules = [
+        //region sources
+        CacheModule::class,
+        DBModule::class,
+        //endregion
 
-    private var _binding: FragmentSecondBinding? = null
-    @Inject lateinit var secondViewModel: SecondViewModel 
-    
-    override fun traerViewModel(): SecondViewModel = secondViewModel
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+        //region logic
+        DatasourceModule::class,
+        UseCasesModule::class,
+        ComponentUIModule::class,
+        //endregion
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        //region ui
+        AndroidInjectionModule::class,
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
-        return binding.root
+        //region Dialogs
+        DialogBuilder::class,
+        //endregion
 
-    }
+        //region activities
+        ActivityViewModelModule::class,
+        ActivityBuilder::class,
+        //endregion
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        //region fragments
+        FragmentViewModelModule::class,
+        FragmentBuilder::class
+        //endregion
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-            secondViewModel.showError()
-        }
-    }
+        //endregion
+    ]
+)
+interface ApplicationComponent : AndroidInjector<CustomApplication> {
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    
+    interface Builder : AndroidInjector.Factory<CustomApplication>
+
 }

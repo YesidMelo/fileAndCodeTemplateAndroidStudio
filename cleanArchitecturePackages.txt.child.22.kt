@@ -1,8 +1,14 @@
-package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2
+package ${PACKAGE_NAME}.di.logic
 
-import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
-import kotlinx.coroutines.flow.Flow
+import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasource
+import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasourceImpl
+import dagger.Module
+import dagger.Provides
 
-interface ExampleComponent2 : BaseUI {
-    fun loadError() : Flow<Boolean>
+@Module
+class DatasourceModule {
+    
+    @Provides
+    fun providesExampleDatasource(): ExampleDatasource = ExampleDatasourceImpl()
+
 }

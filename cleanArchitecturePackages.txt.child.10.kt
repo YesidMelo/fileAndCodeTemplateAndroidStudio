@@ -1,6 +1,7 @@
-package ${PACKAGE_NAME}.logic.componentsUI.mainComponent
+package ${PACKAGE_NAME}.logic.componentsUI
 
-import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
 
-interface MainComponentUI: BaseUI {
+interface BaseUI {
+    fun getListenerExceptionUseCase() : LoadListenerExceptionsUseCase 
 }

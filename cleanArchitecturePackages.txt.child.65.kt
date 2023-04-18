@@ -1,28 +1,16 @@
-package ${PACKAGE_NAME}.ui.fragments.second
+package ${PACKAGE_NAME}.ui.activities.main
 
+import android.util.Log
 import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2
-import ${PACKAGE_NAME}.logic.exception.LogicException
+import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
 import ${PACKAGE_NAME}.ui.base.BaseViewModel
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SecondViewModel(@JvmField @Inject var exampleComponent2: ExampleComponent2) :
-    BaseViewModel() {
-    override fun getBaseUI(): BaseUI = exampleComponent2
+class MainViewModel(@Inject @JvmField var mainComponentUI: MainComponentUI) : BaseViewModel() {
 
-    fun showError() {
-        GlobalScope.launch {
-            try {
-                exampleComponent2.loadError().collect()
-            } catch (e: LogicException) {
-                getBaseUI().getListenerExceptionUseCase().invoke()?.postValue(e)
-            } catch (e: Exception) {
-                getBaseUI().getListenerExceptionUseCase().invoke()?.postValue(LogicException())
-            }
-        }
+    override fun getBaseUI(): BaseUI = mainComponentUI
+    
+    fun clickButton(){
+        Log.e("Err","clic in button");
     }
 }

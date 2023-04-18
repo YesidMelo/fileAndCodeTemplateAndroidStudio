@@ -1,12 +1,11 @@
-package ${PACKAGE_NAME}.sources.room.entities
+package ${PACKAGE_NAME}.logic.datasources.exampleDatasource
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import ${PACKAGE_NAME}.sources.room.entities.BaseEntity
-import java.util.Date
+import ${PACKAGE_NAME}.logic.models.ExampleModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-@Entity
-data class ExampleEntity (
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?,
-): BaseEntity()
+class ExampleDatasourceImpl : ExampleDatasource {
+    override fun loadExample(): Flow<ExampleModel> = flow {
+        emit(ExampleModel(value = 100.0))
+    }
+}

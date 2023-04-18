@@ -1,11 +1,11 @@
-package ${PACKAGE_NAME}.logic.componentsUI.mainComponent
+package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
 
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
-import javax.inject.Inject
+import ${PACKAGE_NAME}.logic.models.ExampleModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class MainComponentUIImpl (
-    @JvmField @Inject var loadListenerExceptionsUseCase : LoadListenerExceptionsUseCase
-        ) : MainComponentUI {
-
-    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
+class ExampleUseCaseImpl : ExampleUseCase {
+    override fun invoke(): Flow<ExampleModel> = flow {
+        emit(ExampleModel(value = 100.0))
+    }
 }

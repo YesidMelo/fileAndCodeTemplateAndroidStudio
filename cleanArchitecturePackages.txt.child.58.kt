@@ -1,31 +1,11 @@
-package ${PACKAGE_NAME}.sources.room.daos
+package ${PACKAGE_NAME}.ui.fragments.first
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
-import ${PACKAGE_NAME}.sources.room.entities.BaseEntity
+import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
+import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1
+import ${PACKAGE_NAME}.ui.base.BaseViewModel
+import javax.inject.Inject
 
-@Dao
-interface BaseDao<T : BaseEntity> {
+class FirstViewModel (@JvmField @Inject var exampleComponent1: ExampleComponent1) : BaseViewModel() {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertElement(element: T) : Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertElements(elements: List<T>)
-
-    @Update
-    fun updateElement(element: T)
-
-    @Update
-    fun updateElements(elements: List<T>)
-
-    @Delete
-    fun deleteElement(element: T)
-
-    @Delete
-    fun deleteListElements(elements: List<T>)
-
+    override fun getBaseUI(): BaseUI = exampleComponent1
 }

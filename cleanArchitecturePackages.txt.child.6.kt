@@ -1,51 +1,37 @@
-package ${PACKAGE_NAME}.ui.fragments.first
+package ${PACKAGE_NAME}.sources.room
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import ${PACKAGE_NAME}.R
-import ${PACKAGE_NAME}.databinding.FragmentFirstBinding
-import ${PACKAGE_NAME}.ui.base.BaseFragment
-import javax.inject.Inject
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import ${PACKAGE_NAME}.sources.room.entities.ExampleEntity
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class FirstFragment : BaseFragment<FirstViewModel>() {
+@Database(
+    //region entities
+    entities = [
+    ExampleEntity::class
+    ],
+    //endregion
 
-    private var _binding: FragmentFirstBinding? = null
-    @Inject lateinit var firstViewModel: FirstViewModel
+    //region views
+    views = [],
+    //endregion
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    version = 1
+)
+abstract class DBApp : RoomDatabase() {
 
-    override fun traerViewModel(): FirstViewModel = firstViewModel
+    companion object {
+        private val NAME_DB = "${PACKAGE_NAME}"
+        private var instance: DBApp? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        fun getInstance(context: Context) : DBApp {
+            if(instance == null) {
+                instance = Room
+                    .databaseBuilder(context,DBApp::class.java, NAME_DB)
+                    .build()
+            }
+            return instance!!
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 }

@@ -1,16 +1,8 @@
-package ${PACKAGE_NAME}.ui.activities.main
+package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
 
-import android.util.Log
-import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
-import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
-import ${PACKAGE_NAME}.ui.base.BaseViewModel
-import javax.inject.Inject
+import ${PACKAGE_NAME}.logic.models.ExampleModel
+import kotlinx.coroutines.flow.Flow
 
-class MainViewModel(@Inject @JvmField var mainComponentUI: MainComponentUI) : BaseViewModel() {
-
-    override fun getBaseUI(): BaseUI = mainComponentUI
-    
-    fun clickButton(){
-        Log.e("Err","clic in button");
-    }
+interface ExampleUseCase {
+    fun invoke(): Flow<ExampleModel>
 }

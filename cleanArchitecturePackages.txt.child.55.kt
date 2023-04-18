@@ -1,8 +1,9 @@
-package ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase
+package ${PACKAGE_NAME}.sources.cache
 
-import androidx.lifecycle.MutableLiveData
-import ${PACKAGE_NAME}.logic.exception.LogicException
-
-interface LoadListenerExceptionsUseCase {
-    fun invoke() : MutableLiveData<LogicException?>?
+class Cache {
+    var listenerExceptionsLiveData: Any? = null
+    companion object {
+        private val instance = Cache()
+        fun getInstance() = instance
+    }
 }

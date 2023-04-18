@@ -1,11 +1,12 @@
-package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1
+package ${PACKAGE_NAME}.di.ui.builders.activities
 
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
-import javax.inject.Inject
+import ${PACKAGE_NAME}.ui.activities.main.MainActivity
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
-class ExampleComponent1Impl constructor(
-    @JvmField @Inject var loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase
-): ExampleComponent1 {
+@Module
+interface ActivityBuilder {
 
-    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
+    @ContributesAndroidInjector(modules = [ActivityViewModelModule::class])
+    fun providesMainActivity(): MainActivity
 }

@@ -1,19 +1,8 @@
-package ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase
+package ${PACKAGE_NAME}.logic.datasources.exampleDatasource
 
-import androidx.lifecycle.MutableLiveData
-import ${PACKAGE_NAME}.logic.exception.LogicException
-import ${PACKAGE_NAME}.sources.cache.Cache
-import javax.inject.Inject
+import ${PACKAGE_NAME}.logic.models.ExampleModel
+import kotlinx.coroutines.flow.Flow
 
-class LoadListenerExceptionsUseCaseImpl constructor(
-    @JvmField @Inject var cache: Cache
-): LoadListenerExceptionsUseCase {
-
-    override fun invoke(): MutableLiveData<LogicException?> {
-        if(cache.listenerExceptionsLiveData == null)
-        {
-            cache.listenerExceptionsLiveData = MutableLiveData<LogicException?>()
-        }
-        return cache.listenerExceptionsLiveData!! as MutableLiveData<LogicException?>
-    }
+interface ExampleDatasource {
+    fun loadExample(): Flow<ExampleModel>
 }

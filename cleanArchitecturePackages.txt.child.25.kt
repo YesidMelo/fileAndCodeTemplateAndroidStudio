@@ -1,8 +1,23 @@
-package ${PACKAGE_NAME}.logic.exception
+package ${PACKAGE_NAME}.di.ui.customs
 
-enum class OrigenError { Sistema, Usuario }
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.internal.Beta
+import javax.inject.Inject
 
-open class LogicException constructor(
-    var mensaje : String = "Surgio un problema inesperado intentelo mas tarde",
-    val origenError: OrigenError = OrigenError.Sistema
-) : Exception(mensaje)
+@Beta
+abstract class DaggerActivityCustom : AppCompatActivity (), HasAndroidInjector {
+
+    @Inject lateinit var androidInjector : DispatchingAndroidInjector<Any>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+}

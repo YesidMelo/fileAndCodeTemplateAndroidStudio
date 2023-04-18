@@ -1,5 +1,4 @@
-package ${PACKAGE_NAME}.logic.models
+package ${PACKAGE_NAME}.logic.constants
 
-data class ExampleModel (
-    var value: Double
-)
+object DelaysApplication {
+}

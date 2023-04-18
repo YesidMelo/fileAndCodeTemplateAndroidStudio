@@ -1,16 +1,11 @@
-package ${PACKAGE_NAME}.di.ui.builders.fragments
+package ${PACKAGE_NAME}.logic.componentsUI.mainComponent
 
-import ${PACKAGE_NAME}.ui.fragments.first.FirstFragment
-import ${PACKAGE_NAME}.ui.fragments.second.SecondFragment
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
+import javax.inject.Inject
 
-@Module
-interface FragmentBuilder {
-    
-    @ContributesAndroidInjector(modules = [FragmentViewModelModule::class])
-    fun providesFirstFragment(): FirstFragment
+class MainComponentUIImpl (
+    @JvmField @Inject var loadListenerExceptionsUseCase : LoadListenerExceptionsUseCase
+        ) : MainComponentUI {
 
-    @ContributesAndroidInjector(modules = [FragmentViewModelModule::class])
-    fun providesSecondFragment(): SecondFragment
+    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase = loadListenerExceptionsUseCase
 }

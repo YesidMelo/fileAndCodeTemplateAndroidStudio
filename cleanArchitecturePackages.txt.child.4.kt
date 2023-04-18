@@ -1,13 +1,14 @@
-package ${PACKAGE_NAME}.di.ui.builders.activities
+package ${PACKAGE_NAME}.di
 
-import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
-import ${PACKAGE_NAME}.ui.activities.main.MainViewModel
+import ${PACKAGE_NAME}.application.CustomApplication
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
-class ActivityViewModelModule {
+class AplicationModule {
 
+    @Singleton
     @Provides
-    fun providesMainViewModel(mainComponentUI: MainComponentUI) = MainViewModel(mainComponentUI = mainComponentUI)
+    fun providesContext(aplication: CustomApplication) = aplication
 }

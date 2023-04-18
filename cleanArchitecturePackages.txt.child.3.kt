@@ -1,12 +1,16 @@
-package ${PACKAGE_NAME}.di.ui.builders.activities
+package ${PACKAGE_NAME}.di.ui.builders.dialog
 
-import ${PACKAGE_NAME}.ui.activities.main.MainActivity
+import ${PACKAGE_NAME}.ui.dialogs.InformativeDialog
+import ${PACKAGE_NAME}.ui.dialogs.LoadingDialog
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-interface ActivityBuilder {
-
-    @ContributesAndroidInjector(modules = [ActivityViewModelModule::class])
-    fun providesMainActivity(): MainActivity
+abstract class DialogBuilder {
+    
+    @ContributesAndroidInjector(modules = [])
+    abstract fun contributeInformativeDialog(): InformativeDialog
+    
+    @ContributesAndroidInjector(modules = [])
+    abstract fun contributeLoadingDialog() : LoadingDialog
 }

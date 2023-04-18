@@ -1,7 +1,14 @@
-package ${PACKAGE_NAME}.logic.componentsUI
+package ${PACKAGE_NAME}.di.sources
 
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
+import ${PACKAGE_NAME}.application.CustomApplication
+import ${PACKAGE_NAME}.sources.room.DBApp
+import dagger.Module
+import dagger.Provides
 
-interface BaseUI {
-    fun getListenerExceptionUseCase() : LoadListenerExceptionsUseCase 
+@Module
+class DBModule {
+
+    @Provides
+    fun providesBaseDatosLocal(): DBApp = DBApp.getInstance(context = CustomApplication.getInstance()!!.applicationContext)
+
 }

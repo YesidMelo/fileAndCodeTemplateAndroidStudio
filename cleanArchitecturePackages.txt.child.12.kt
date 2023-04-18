@@ -1,14 +1,6 @@
-package ${PACKAGE_NAME}.di
+package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1
 
-import ${PACKAGE_NAME}.application.CustomApplication
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import ${PACKAGE_NAME}.logic.componentsUI.BaseUI
 
-@Module
-class AplicationModule {
-
-    @Singleton
-    @Provides
-    fun providesContext(aplication: CustomApplication) = aplication
+interface ExampleComponent1 : BaseUI {
 }

@@ -1,14 +1,26 @@
-package ${PACKAGE_NAME}.di.sources
+package ${PACKAGE_NAME}.application
 
-import ${PACKAGE_NAME}.application.CustomApplication
-import ${PACKAGE_NAME}.sources.room.DBApp
-import dagger.Module
-import dagger.Provides
+import ${PACKAGE_NAME}.di.DaggerApplicationComponent
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-@Module
-class DBModule {
+class CustomApplication : DaggerApplication() {
 
-    @Provides
-    fun providesBaseDatosLocal(): DBApp = DBApp.getInstance(context = CustomApplication.getInstance()!!.applicationContext)
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+    }
+    
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerApplicationComponent.builder().build()
+    
 
+    //region estatico
+
+    companion object {
+        private var instance: CustomApplication? = null
+        fun getInstance() = instance
+    }
+
+    //endregion
 }

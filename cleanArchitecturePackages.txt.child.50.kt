@@ -1,12 +1,19 @@
-package ${PACKAGE_NAME}.ui.utils.extentions
+package ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase
 
-import ${PACKAGE_NAME}.R
+import androidx.lifecycle.MutableLiveData
 import ${PACKAGE_NAME}.logic.exception.LogicException
+import ${PACKAGE_NAME}.sources.cache.Cache
+import javax.inject.Inject
 
-fun <T : LogicException> T.traerMensajeStringRes() : Int {
-    return R.string.surgio_problema_inesperado
-}
+class LoadListenerExceptionsUseCaseImpl constructor(
+    @JvmField @Inject var cache: Cache
+): LoadListenerExceptionsUseCase {
 
-fun <T : LogicException>  T.traerTituloStringRes() : Int {
-    return R.string.problema_inesperado
+    override fun invoke(): MutableLiveData<LogicException?> {
+        if(cache.listenerExceptionsLiveData == null)
+        {
+            cache.listenerExceptionsLiveData = MutableLiveData<LogicException?>()
+        }
+        return cache.listenerExceptionsLiveData!! as MutableLiveData<LogicException?>
+    }
 }

@@ -1,8 +1,16 @@
-package ${PACKAGE_NAME}.logic.datasources.exampleDatasource
+package ${PACKAGE_NAME}.di.ui.builders.fragments
 
-import ${PACKAGE_NAME}.logic.models.ExampleModel
-import kotlinx.coroutines.flow.Flow
+import ${PACKAGE_NAME}.ui.fragments.first.FirstFragment
+import ${PACKAGE_NAME}.ui.fragments.second.SecondFragment
+import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
-interface ExampleDatasource {
-    fun loadExample(): Flow<ExampleModel>
+@Module
+interface FragmentBuilder {
+    
+    @ContributesAndroidInjector(modules = [FragmentViewModelModule::class])
+    fun providesFirstFragment(): FirstFragment
+
+    @ContributesAndroidInjector(modules = [FragmentViewModelModule::class])
+    fun providesSecondFragment(): SecondFragment
 }

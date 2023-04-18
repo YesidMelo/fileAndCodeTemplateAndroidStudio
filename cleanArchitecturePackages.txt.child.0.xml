@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.pruebaTecnica.examinandotesting.ui.fragments.FirstFragment"
+        android:name="${PACKAGE_NAME}.ui.fragments.first.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.pruebaTecnica.examinandotesting.ui.fragments.SecondFragment"
+        android:name="${PACKAGE_NAME}.ui.fragments.second.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

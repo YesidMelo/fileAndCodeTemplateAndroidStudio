@@ -1,8 +1,147 @@
+1. add to manifest
+<uses-permission android:name="android.permission.INTERNET"/>
 
-add to gradle
-    //region gestores datos
-    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+2. add to build.gradle to level module
 
-    implementation 'com.squareup.picasso:picasso:2.8'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'jacoco'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+//region properties
+
+//region documents
+def secretsDevFile = rootProject.file("secrets_dev.properties")
+def secretsDev = new Properties()
+secretsDev.load(new FileInputStream(secretsDevFile))
+
+def secretsProdFile = rootProject.file("secrets_prod.properties")
+def secretsProd = new Properties()
+secretsProd.load(new FileInputStream(secretsProdFile))
+//endregion
+
+//region name variables
+def pruebas = "PRUEBAS"
+//endregion
+
+//endregion
+
+android {
+ //region jacoco
+    jacoco {
+        version = "0.8.7"
+    }
+
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+                excludes = ['jdk.internal.*']
+            }
+        }
+
+        unitTests.returnDefaultValues = true
+    }
     //endregion
+}
+
+ext {
+    lottieVersion = "3.4.0"
+    daggerVersion = "2.35.1"
+    metadataDagger = "0.5.0"
+    room_version = "2.4.3"
+    navigation = "2.5.3"
+    retrofitVersion = "2.7.2"
+    converterGsonVersion="2.4.0"
+    picassoVersion="2.8"
+}
+
+    //region nuevas implementaciones
+
+    //region dagger
+    implementation "com.google.dagger:dagger:\$daggerVersion"
+    implementation "com.google.dagger:dagger-android:\$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:\$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:\$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:\$daggerVersion"
+    kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:\$metadataDagger"
+    //endregion
+
+    //region room
+    implementation "androidx.room:room-runtime:\$room_version"
+    annotationProcessor "androidx.room:room-compiler:\$room_version"
+    kapt "androidx.room:room-compiler:\$room_version"
+    testImplementation "androidx.room:room-testing:\$room_version"
+    //endregion
+
+    //region lotties
+    implementation "com.airbnb.android:lottie:\$lottieVersion"
+    //endregion
+
+    implementation "com.squareup.retrofit2:retrofit:\$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:\$converterGsonVersion"
+
+    implementation "com.squareup.picasso:picasso:\$picassoVersion"
+
+    //endregion
+
+//region task jacoco
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = [
+            '**/R.class',
+          '**/R$*.class',
+          '**/BuildConfig.*',
+          '**/Manifest*.*',
+          '**/*Test*.*',
+          'android/**/*.*',
+
+          '**/*\$ViewBinder*.*',
+          '**/*\$ViewInjector*.*',
+          '**/*Module.*',
+          '**/*dao*.*',
+          '**/*_MembersInjector.class',
+          '**/Dagger*Component*.class',
+          '**/Dagger*Subcomponent*.class',
+          '**/*Subcomponent\$Builder.class',
+          '**/*Module_*Factory.class',
+          '**/*Module_*Impl.class',
+          '**/*Module_*ViewBinding.class',
+          '**/databinding/**'
+    ]
+
+    def debugTree = fileTree(dir: "\$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "\$project.projectDir/src/main/java"
+
+    sourceDirectories.from = files([mainSrc])
+    classDirectories.from = files([debugTree])
+    executionData.from = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
+    ])
+
+}
+//endregion
+
+3. add to level project
+
+buildscript {
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.google.gms:google-services:4.3.4'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+    }
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '7.3.1' apply false
+    id 'com.android.library' version '7.3.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+}

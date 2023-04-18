@@ -1,30 +1,13 @@
-package ${PACKAGE_NAME}.di.logic
+package ${PACKAGE_NAME}.di.ui.builders.activities
 
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent1.ExampleComponent1Impl
-import ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2.ExampleComponent2Impl
 import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUI
-import ${PACKAGE_NAME}.logic.componentsUI.mainComponent.MainComponentUIImpl
-import ${PACKAGE_NAME}.logic.useCases.exceptionUseCase.ExceptionUseCase
-import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
+import ${PACKAGE_NAME}.ui.activities.main.MainViewModel
 import dagger.Module
 import dagger.Provides
 
 @Module
-class ComponentUIModule {
+class ActivityViewModelModule {
 
     @Provides
-    fun providesExampleComponent1(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase)
-            : ExampleComponent1 =
-        ExampleComponent1Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
-
-    @Provides
-    fun providesExampleComponent2(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase, exceptionUseCase: ExceptionUseCase)
-            : ExampleComponent2 =
-        ExampleComponent2Impl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase, exceptionsUseCase = exceptionUseCase)
-
-    @Provides
-    fun providesMainComponentUI(loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase): MainComponentUI =
-        MainComponentUIImpl(loadListenerExceptionsUseCase = loadListenerExceptionsUseCase)
+    fun providesMainViewModel(mainComponentUI: MainComponentUI) = MainViewModel(mainComponentUI = mainComponentUI)
 }

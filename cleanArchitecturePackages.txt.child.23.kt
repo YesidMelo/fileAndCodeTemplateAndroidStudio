@@ -1,18 +1,25 @@
-package ${PACKAGE_NAME}.logic.componentsUI.exampleComponent2
+package ${PACKAGE_NAME}.di.logic
 
+import ${PACKAGE_NAME}.logic.useCases.exampleUseCase.ExampleUseCase
+import ${PACKAGE_NAME}.logic.useCases.exampleUseCase.ExampleUseCaseImpl
 import ${PACKAGE_NAME}.logic.useCases.exceptionUseCase.ExceptionUseCase
+import ${PACKAGE_NAME}.logic.useCases.exceptionUseCase.ExceptionUseCaseImpl
 import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCase
-import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
+import ${PACKAGE_NAME}.logic.useCases.loadListenerExceptionsUseCase.LoadListenerExceptionsUseCaseImpl
+import ${PACKAGE_NAME}.sources.cache.Cache
+import dagger.Module
+import dagger.Provides
 
-class ExampleComponent2Impl constructor(
-    @JvmField @Inject var loadListenerExceptionsUseCase: LoadListenerExceptionsUseCase,
-    @JvmField @Inject var exceptionsUseCase: ExceptionUseCase
-) : ExampleComponent2 {
-    
-    override fun loadError(): Flow<Boolean> = exceptionsUseCase.invoke()
+@Module
+class UseCasesModule {
 
-    override fun getListenerExceptionUseCase(): LoadListenerExceptionsUseCase =
-        loadListenerExceptionsUseCase
+    @Provides
+    fun providesExampleUseCase(): ExampleUseCase = ExampleUseCaseImpl()
 
+    @Provides
+    fun providesExceptionUseCase(): ExceptionUseCase = ExceptionUseCaseImpl()
+
+    @Provides
+    fun providesLoadListenerExceptionsUseCase(cache: Cache)
+            : LoadListenerExceptionsUseCase = LoadListenerExceptionsUseCaseImpl(cache = cache)
 }

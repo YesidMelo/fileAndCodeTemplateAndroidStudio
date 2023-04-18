@@ -1,14 +1,17 @@
-package ${PACKAGE_NAME}.di.logic
+package ${PACKAGE_NAME}.di.ui.base
 
-import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasource
-import ${PACKAGE_NAME}.logic.datasources.exampleDatasource.ExampleDatasourceImpl
-import dagger.Module
-import dagger.Provides
+import android.os.Bundle
+import androidx.lifecycle.ViewModel
+import ${PACKAGE_NAME}.di.ui.customs.DaggerActivityCustom
 
-@Module
-class DatasourceModule {
-    
-    @Provides
-    fun providesExampleDatasource(): ExampleDatasource = ExampleDatasourceImpl()
+abstract class BaseActivityDagger<T: ViewModel> : DaggerActivityCustom() {
 
+    private var viewModel : T? = null
+
+    abstract fun getViewModel() : T
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.viewModel = if(viewModel == null) getViewModel() else this.viewModel
+    }
 }

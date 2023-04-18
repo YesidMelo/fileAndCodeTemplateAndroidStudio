@@ -1,8 +1,8 @@
-package ${PACKAGE_NAME}.logic.useCases.exampleUseCase
+package ${PACKAGE_NAME}.logic.exception
 
-import ${PACKAGE_NAME}.logic.models.ExampleModel
-import kotlinx.coroutines.flow.Flow
+enum class OrigenError { Sistema, Usuario }
 
-interface ExampleUseCase {
-    fun invoke(): Flow<ExampleModel>
-}
+open class LogicException constructor(
+    var mensaje : String = "Surgio un problema inesperado intentelo mas tarde",
+    val origenError: OrigenError = OrigenError.Sistema
+) : Exception(mensaje)
