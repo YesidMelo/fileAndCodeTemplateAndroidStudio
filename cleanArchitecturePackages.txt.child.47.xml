@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="dimension12sp">12sp</dimen>
-    <dimen name="texto18sp">18sp</dimen>
-    <dimen name="dimencion200dp">200dp</dimen>
-    <dimen name="dimension16dp">16dp</dimen>
-    <dimen name="dimen48dp">48dp</dimen>
-    <dimen name="dimen25dp">25dp</dimen>
-</resources>
