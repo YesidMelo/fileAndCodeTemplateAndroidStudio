@@ -30,7 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 )
 @Composable
 fun ${Name_view}ViewPreview() {
-    JacsTheme {
+    ${Name_theme} {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
@@ -59,11 +59,12 @@ fun ${Name_view}View(
 ) {
     //region stateObserver
     val currentState by viewModel.uiState.collectAsState(initial = ${Name_view}ViewModel.${Name_view}UIState())
+    logicApplyInView(currentState= currentState)
     //endregion
 
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
         val (textId, progressId) = createRefs()
-        //region text splash
+        //region ${Name_view}
         val guidelineEnd = createGuidelineFromEnd(0.06f)
         val guidelineStart = createGuidelineFromStart(0.06f)
 
@@ -82,4 +83,8 @@ fun ${Name_view}View(
         )
         //endregion
     }
+}
+
+private fun logicApplyInView(currentState: ${Name_view}ViewModel.${Name_view}UIState) {
+
 }
