@@ -54,7 +54,7 @@ fun ${Name_view}ViewPreview() {
 @Composable
 fun ${Name_view}View(
     modifier: Modifier = Modifier,
-    viewModel: ${Name_view}ViewModel = hiltViewModel(),
+    viewModel: ${Name_view}ViewModel = hiltViewModel<${Name_view}ViewModelImpl>(),
     navigateToExample: () -> Unit
 ) {
     //region stateObserver

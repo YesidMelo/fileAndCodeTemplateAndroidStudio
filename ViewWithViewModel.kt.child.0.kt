@@ -1,41 +1,47 @@
-package ${PACKAGE_NAME}
+package ${PACKAGE_NAME}.viewModel
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//file name: ${Name_view}ViewModel
+//file name: viewModel/${Name_view}ViewModelImpl
 
 @HiltViewModel
-open class ${Name_view}ViewModel @Inject constructor() : ViewModel() {
-    private val dispatcher = Dispatchers.IO
-    private val _uiState = MutableStateFlow(${Name_view}UIState())
-    val uiState: StateFlow<${Name_view}UIState> = _uiState.asStateFlow()
+class ${Name_view}ViewModelImpl @Inject constructor() : ${Name_view}ViewModel() {
 
-    data class ${Name_view}UIState(val loadingState: Boolean = false)
-
-    fun loadExample() {
-        viewModelScope.launch(dispatcher) {
-            updateUIState(loadingState = true)
+    override fun load${Name_view}() {
+        viewModelScope.launch {
+            updateState(loadingState = true)
             delay(3_000)
-            updateUIState(loadingState = false)
+            updateState(
+                loadingState = false,
+                throwable = null,
+                states${Name_view}UI = States${Name_view}UI.SHOW_ERROR
+            )
         }
     }
 
-    private fun updateUIState(
-        loadingState: Boolean = _uiState.value.loadingState
+    override fun closeException() {
+        viewModelScope.launch {
+            updateState(throwable = null)
+        }
+    }
+
+    override fun updateState(
+        loadingState: Boolean,
+        throwable: Throwable?,
+        states${Name_view}UI: States${Name_view}UI
     ) {
         viewModelScope.launch {
-            _uiState.emit(${Name_view}UIState(
-                loadingState = loadingState
-            ))
+            _uiState.emit(
+                ${Name_view}UIState(
+                    loadingState = loadingState,
+                    throwable = throwable,
+                    states${Name_view}UI = states${Name_view}UI
+                )
+            )
         }
     }
 }
